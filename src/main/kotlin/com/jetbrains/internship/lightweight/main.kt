@@ -8,7 +8,7 @@ import com.jetbrains.internship.lightweight.model.CallChain
 import com.jetbrains.internship.lightweight.model.printCallChain
 import com.jetbrains.internship.lightweight.parse.ExprGrammar
 
-fun main() {
+fun main(args: Array<String>) {
     val callChainInput = readLine() ?: return
     when (val parseResult = ExprGrammar.tryParseToEnd(callChainInput)) {
         is Parsed<CallChain> -> {
