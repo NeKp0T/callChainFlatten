@@ -4,6 +4,8 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.parser.Parser
+import com.jetbrains.internship.lightweight.parse.ExprGrammar.getValue
+import com.jetbrains.internship.lightweight.parse.ExprGrammar.provideDelegate
 import com.jetbrains.internship.lightweight.parse.model.*
 
 object ExprGrammar : Grammar<List<Call>>() {
@@ -13,20 +15,24 @@ object ExprGrammar : Grammar<List<Call>>() {
     private val minusSign by token("-")
     private val numOpSign by token("[+*]")
     private val compareSign by token("[><]")
+    private val equalSign by token("=")
     private val boolOpSign by token("[|&]")
-    private val number by token("[\\d]+") use { text.toInt() }
-    private val element by token("element") map { Element() }
+    private val numberToken by token("[\\d]+")
+    private val elementToken by token("element")
     private val mapCallName by token("map")
     private val filterCallName by token("filter")
     private val lcpar by token("\\{")
     private val rcpar by token("}")
     private val callChainOp by token("%>%")
 
-    val binaryOperationSign = minusSign or numOpSign or compareSign or boolOpSign use { text }
+    val element by elementToken map { Element() }
+    val number by numberToken use { text.toInt() }
+
+    val binaryOperationSign = minusSign or numOpSign or compareSign or equalSign or boolOpSign use { text }
 
     val numConstant by (number or (-minusSign * number map { -it })) map ::Num
 
-    val constantExpression by numConstant map { ConstantExpression(it) }
+    val constantExpression by numConstant map ::ConstantExpression
 
     val binaryExpression by
         -lpar * parser(this::expression) * binaryOperationSign * parser(this::expression) * -rpar use {
