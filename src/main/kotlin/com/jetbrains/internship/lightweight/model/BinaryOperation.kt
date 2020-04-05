@@ -1,4 +1,4 @@
-package com.jetbrains.internship.lightweight.parse.model
+package com.jetbrains.internship.lightweight.model
 
 
 class BinaryOperation(val symbol: String, val inType: Type, val outType: Type)

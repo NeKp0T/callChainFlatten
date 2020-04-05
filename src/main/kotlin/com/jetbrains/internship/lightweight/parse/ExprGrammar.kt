@@ -4,9 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.parser.Parser
-import com.jetbrains.internship.lightweight.parse.ExprGrammar.getValue
-import com.jetbrains.internship.lightweight.parse.ExprGrammar.provideDelegate
-import com.jetbrains.internship.lightweight.parse.model.*
+import com.jetbrains.internship.lightweight.model.*
 
 object ExprGrammar : Grammar<List<Call>>() {
     private val ws by token("\\s+", ignore = true) // let's ignore whitespaces for the sake of readability

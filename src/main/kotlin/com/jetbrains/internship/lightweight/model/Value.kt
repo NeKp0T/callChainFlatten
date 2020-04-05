@@ -1,4 +1,4 @@
-package com.jetbrains.internship.lightweight.parse.model
+package com.jetbrains.internship.lightweight.model
 
 sealed class Value<out T> {
     abstract val value: T

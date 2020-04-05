@@ -1,7 +1,7 @@
 package com.jetbrains.internship.lightweight.parse
 
 import com.github.h0tk3y.betterParse.parser.*
-import com.jetbrains.internship.lightweight.parse.model.*
+import com.jetbrains.internship.lightweight.model.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
