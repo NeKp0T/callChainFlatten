@@ -4,6 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.parser.Parser
+import com.github.h0tk3y.betterParse.parser.parseToEnd
 import com.jetbrains.internship.lightweight.parse.ExprGrammar.provideDelegate
 import com.jetbrains.internship.lightweight.model.*
 
@@ -50,4 +51,6 @@ object ExprGrammar : Grammar<List<Call>>() {
     val callChain by separated(call, callChainOp) use { terms }
 
     override val rootParser = callChain
+
+    fun parseExpressionToEnd(input: String): Expression = expression.parseToEnd(tokenizer.tokenize(input))
 }
