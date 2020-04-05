@@ -79,6 +79,14 @@ internal class ExprGrammarTest {
     }
 
     @Test
+    fun `complex filter call`() {
+        assertEquals(
+            FilterCall(BinaryExpression("+", constExpr(1), Element())),
+            parseToEnd("filter { (1 + element) }", ExprGrammar.filterCall)
+        )
+    }
+
+    @Test
     fun `call chain of one call`() {
         assertEquals(
             callChainOf(MapCall(constExpr(1))),

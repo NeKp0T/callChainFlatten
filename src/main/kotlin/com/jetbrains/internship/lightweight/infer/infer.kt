@@ -13,9 +13,12 @@ fun inferCallChain(startType: Type, calls: CallChain): InferResult {
     for (call in calls) {
         when (call) {
             is FilterCall -> {
-                val inferred = infer(currentType, call.predicate)
-                if (!(inferred is Inferred && inferred.type == Type.BoolType))
-                    return inferred
+                when (val inferred = infer(currentType, call.predicate)) {
+                    is InferFail -> return inferred
+                    is Inferred -> if (inferred.type != Type.BoolType) {
+                        return InferFail(call.predicate)
+                    }
+                }
             }
             is MapCall -> {
                 when (val inferred = infer(currentType, call.transform)) {
