@@ -8,7 +8,7 @@ import com.github.h0tk3y.betterParse.parser.parseToEnd
 import com.jetbrains.internship.lightweight.parse.ExprGrammar.provideDelegate
 import com.jetbrains.internship.lightweight.model.*
 
-object ExprGrammar : Grammar<List<Call>>() {
+object ExprGrammar : Grammar<CallChain>() {
     private val ws by token("\\s+", ignore = true) // let's ignore whitespaces for the sake of readability
     private val lpar by token("\\(")
     private val rpar by token("\\)")
@@ -48,7 +48,7 @@ object ExprGrammar : Grammar<List<Call>>() {
     val filterCall by -filterCallName * -lcpar * expression * -rcpar map ::FilterCall
     val call = mapCall or filterCall
 
-    val callChain by separated(call, callChainOp) use { terms }
+    val callChain by separated(call, callChainOp, acceptZero = false) use { terms.foldRight(null, ::CallChain)!! }
 
     override val rootParser = callChain
 

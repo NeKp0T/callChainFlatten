@@ -81,7 +81,7 @@ internal class ExprGrammarTest {
     @Test
     fun `call chain of one call`() {
         assertEquals(
-            listOf(MapCall(constExpr(1))),
+            callChainOf(MapCall(constExpr(1))),
             parseToEnd("map { 1 }", ExprGrammar.callChain)
         )
     }
@@ -89,7 +89,7 @@ internal class ExprGrammarTest {
     @Test
     fun `call chain of multiple calls`() {
         assertEquals(
-            listOf(MapCall(constExpr(1)), FilterCall(constExpr(2)), FilterCall(constExpr(3))),
+            callChainOf(MapCall(constExpr(1)), FilterCall(constExpr(2)), FilterCall(constExpr(3))),
             parseToEnd("map { 1 } %>% filter { 2 } %>% filter { 3 }", ExprGrammar.callChain)
         )
     }
