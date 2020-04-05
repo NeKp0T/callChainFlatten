@@ -24,6 +24,13 @@ internal class ExprGrammarTest {
     }
 
     @Test
+    fun `-element fails`() {
+        assertParseFails {
+            parseToEnd("-element", ExprGrammar.element)
+        }
+    }
+
+    @Test
     fun `binary expression`() {
         assertEquals(
             BinaryExpression("+", constExpr(123), constExpr(321)),
@@ -89,7 +96,7 @@ internal class ExprGrammarTest {
 
     @Test
     fun `empty call chain fails`() {
-        assertThrows(ParseException::class.java) { parseToEnd("", ExprGrammar.callChain) }
+        assertParseFails { parseToEnd("", ExprGrammar.callChain) }
     }
 
     private fun <T> tryParseToEnd(input: String, parser: Parser<T>): ParseResult<T> {
@@ -98,4 +105,10 @@ internal class ExprGrammarTest {
     }
 
     private fun <T> parseToEnd(input: String, parser: Parser<T>): T = tryParseToEnd(input, parser).toParsedOrThrow().value
+
+    private fun assertParseFails(executable: () -> Unit) {
+        assertThrows(ParseException::class.java) {
+            executable()
+        }
+    }
 }
