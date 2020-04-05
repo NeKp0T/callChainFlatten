@@ -5,6 +5,7 @@ import com.github.h0tk3y.betterParse.parser.ErrorResult
 import com.github.h0tk3y.betterParse.parser.Parsed
 import com.jetbrains.internship.lightweight.flatten.flattenCallChain
 import com.jetbrains.internship.lightweight.model.CallChain
+import com.jetbrains.internship.lightweight.model.printCallChain
 import com.jetbrains.internship.lightweight.parse.ExprGrammar
 
 fun main() {
@@ -16,7 +17,7 @@ fun main() {
             if (flatChain == null) {
                 println("TYPE ERROR")
             } else {
-                println()
+                println(printCallChain(flatChain))
             }
         }
         is ErrorResult -> {
