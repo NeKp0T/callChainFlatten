@@ -31,7 +31,7 @@ internal class ExprGrammarTest {
     }
 
     @Test
-    fun `binary expression with element`() {
+    fun `num expression with element`() {
         assertEquals(
             BinaryExpression("+", constExpr(123), Element()),
             parseToEnd("(123 + element)", ExprGrammar.binaryExpression)
