@@ -1,4 +1,4 @@
-package com.jetbrains.internship.lightweight.straighten
+package com.jetbrains.internship.lightweight.flatten
 
 import com.jetbrains.internship.lightweight.model.*
 

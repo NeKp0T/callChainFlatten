@@ -1,9 +1,8 @@
-package com.jetbrains.internship.lightweight.straighten
+package com.jetbrains.internship.lightweight.flatten
 
 import com.jetbrains.internship.lightweight.model.printExpression
 import com.jetbrains.internship.lightweight.parse.ExprGrammar
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
