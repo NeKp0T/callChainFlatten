@@ -21,5 +21,3 @@ fun getBoolBiOperation(symbol: String): BinaryOperation? {
         BinaryOperation(symbol, Type.BoolType, Type.BoolType)
     else null
 }
-
-fun getBiOperation(symbol: String): BinaryOperation? = get
