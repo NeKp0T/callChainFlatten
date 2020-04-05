@@ -2,11 +2,24 @@ package com.jetbrains.internship.lightweight.parse.model
 
 sealed class Value<out T> {
     abstract val value: T
+    abstract val type: Type
 }
 
-class Num(override val value: Int) : Value<Int>()
+data class Num(override val value: Int) : Value<Int>() {
+    override val type: Type
+        get() = Type.NumType
+}
 
-class Bool(override val value: Boolean) : Value<Boolean>()
+data class Bool(override val value: Boolean) : Value<Boolean>() {
+    override val type: Type
+        get() = Type.BoolType
+}
+
+enum class Type {
+    NumType,
+    BoolType
+}
+
 
 fun <T> liftFromNumber(function: (Int, Int) -> T): (Num, Num) -> T {
     return { a: Num, b: Num -> function(a.value, b.value) }
