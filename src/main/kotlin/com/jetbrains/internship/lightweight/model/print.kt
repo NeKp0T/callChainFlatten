@@ -6,6 +6,13 @@ fun printExpression(expression: Expression): String {
     return visitor.builder.toString()
 }
 
+fun printCallChain(callChain: CallChain): String = callChain.joinToString("%>%") {
+    when (it) {
+        is FilterCall -> "filter{${printExpression(it.predicate)}}"
+        is MapCall -> "map{${printExpression(it.transform)}}"
+    }
+}
+
 private class PrinterVisitor(val builder: StringBuilder) : ExpressionVisitor<Unit> {
     override fun visitElement(expression: Element) {
         builder.append("element")

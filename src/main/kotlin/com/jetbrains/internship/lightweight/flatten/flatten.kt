@@ -5,6 +5,11 @@ import com.jetbrains.internship.lightweight.infer.inferCallChain
 import com.jetbrains.internship.lightweight.model.*
 import com.jetbrains.internship.lightweight.model.ConstantExpression.Companion.constExpr
 
+/**
+ * Tries to flatten call chain to a form of `filter { ... } %>% map { ... }`.
+ *
+ * Returns `null` if call chain has a type error.
+ */
 fun flattenCallChain(callChain: CallChain, startType: Type = Type.NumType): CallChain? {
     if (inferCallChain(startType, callChain) is InferFail) {
         return null
