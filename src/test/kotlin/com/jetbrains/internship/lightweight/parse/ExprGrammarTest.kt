@@ -2,6 +2,7 @@ package com.jetbrains.internship.lightweight.parse
 
 import com.github.h0tk3y.betterParse.parser.*
 import com.jetbrains.internship.lightweight.model.*
+import com.jetbrains.internship.lightweight.model.ConstantExpression.Companion.constExpr
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -97,6 +98,4 @@ internal class ExprGrammarTest {
     }
 
     private fun <T> parseToEnd(input: String, parser: Parser<T>): T = tryParseToEnd(input, parser).toParsedOrThrow().value
-
-    private fun constExpr(value: Int) = ConstantExpression(Num(value))
 }
